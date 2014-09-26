@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/repos/asf/!svn/ver/1608433/commons/proper/net/trunk/src/main/java/org/apache/commons/net
+END
+DatagramSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/DatagramSocketFactory.java
+END
+PrintCommandListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1586986/commons/proper/net/trunk/src/main/java/org/apache/commons/net/PrintCommandListener.java
+END
+ProtocolCommandEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ProtocolCommandEvent.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/package-info.java
+END
+DefaultSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1489533/commons/proper/net/trunk/src/main/java/org/apache/commons/net/DefaultSocketFactory.java
+END
+DefaultDatagramSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/DefaultDatagramSocketFactory.java
+END
+ProtocolCommandListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ProtocolCommandListener.java
+END
+SocketClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/asf/!svn/ver/1586982/commons/proper/net/trunk/src/main/java/org/apache/commons/net/SocketClient.java
+END
+MalformedServerReplyException.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/MalformedServerReplyException.java
+END
+DatagramSocketClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/DatagramSocketClient.java
+END
+ProtocolCommandSupport.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ProtocolCommandSupport.java
+END

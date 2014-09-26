@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repos/asf/!svn/ver/1586983/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp
+END
+NtpUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/asf/!svn/ver/1570303/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp/NtpUtils.java
+END
+NtpV3Packet.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1570303/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp/NtpV3Packet.java
+END
+TimeStamp.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/asf/!svn/ver/1586983/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp/TimeStamp.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp/package-info.java
+END
+NTPUDPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1570303/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp/NTPUDPClient.java
+END
+TimeInfo.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/asf/!svn/ver/1570303/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp/TimeInfo.java
+END
+NtpV3Impl.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/asf/!svn/ver/1570303/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ntp/NtpV3Impl.java
+END

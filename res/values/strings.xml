@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Proto</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="loginid">Login ID:</string>
+    <string name="settings_password">Password:</string>
+	<string name="settings_password2">Password (again):</string>
+    <string name="settings_pwd_not_equal">Passwords do not match.</string>
+	<string name="settings_pwd_equal">Passwords match.</string>
+	<string name="login_title">Set ID/Password</string>
+    
+
+</resources>

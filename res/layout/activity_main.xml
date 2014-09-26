@@ -1,0 +1,96 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.proto.activity.MainActivity"
+    tools:ignore="MergeRootFrame" >
+
+    <com.example.proto.mediaplayer.MyPlayer
+        android:id="@+id/player"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </com.example.proto.mediaplayer.MyPlayer>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout
+            android:id="@+id/menu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true" >
+
+                <LinearLayout
+                    android:id="@+id/first_depth_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/second_depth_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/first_depth_menu"
+                    android:orientation="horizontal" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/program_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@id/second_depth_menu"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal"
+                    android:visibility="gone" >
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="match_parent"
+                        android:background="#444444" >
+                    </ImageView>
+
+                    <ListView
+                        android:id="@+id/contents_list_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_weight="1"
+                        android:scrollbars="none" >
+                    </ListView>
+
+                    <ListView
+                        android:id="@+id/contents_list_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="150dp"
+                        android:layout_weight="1"
+                        android:scrollbars="none" >
+                    </ListView>
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+
+        <!-- 메뉴의 최종 상세 화면 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <LinearLayout
+                android:id="@+id/menu_detail_layout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+				android:layout_alignParentBottom="true"
+                android:background="#ffffff"
+                android:orientation="vertical"
+                android:visibility="gone" >
+            </LinearLayout>
+        </RelativeLayout>
+    </FrameLayout>
+
+</FrameLayout>

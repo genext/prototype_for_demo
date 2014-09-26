@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repos/asf/!svn/ver/1608433/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp
+END
+FTPFileFilter.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPFileFilter.java
+END
+Configurable.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/Configurable.java
+END
+FTPSServerSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPSServerSocketFactory.java
+END
+FTPReply.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPReply.java
+END
+FTPListParseEngine.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/asf/!svn/ver/1414510/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPListParseEngine.java
+END
+FTPSTrustManager.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPSTrustManager.java
+END
+FTPFileEntryParserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/asf/!svn/ver/1574289/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPFileEntryParserImpl.java
+END
+FTPSCommand.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPSCommand.java
+END
+FTPSClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/asf/!svn/ver/1489533/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPSClient.java
+END
+FTPSSocketFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/asf/!svn/ver/1593168/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPSSocketFactory.java
+END
+FTPCmd.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/repos/asf/!svn/ver/1489533/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPCmd.java
+END
+FTPClientConfig.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/repos/asf/!svn/ver/1586986/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPClientConfig.java
+END
+FTPFileFilters.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPFileFilters.java
+END
+FTPConnectionClosedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPConnectionClosedException.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/package-info.java
+END
+FTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/asf/!svn/ver/1608433/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPClient.java
+END
+FTPCommand.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/asf/!svn/ver/1437631/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPCommand.java
+END
+FTPFileEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPFileEntryParser.java
+END
+FTPHTTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/asf/!svn/ver/1489533/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPHTTPClient.java
+END
+FTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTP.java
+END
+FTPFile.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/asf/!svn/ver/1574286/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/FTPFile.java
+END

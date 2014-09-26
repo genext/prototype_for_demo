@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/bsd
+END
+RCommandClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/bsd/RCommandClient.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/bsd/package-info.java
+END
+RExecClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1571282/commons/proper/net/trunk/src/main/java/org/apache/commons/net/bsd/RExecClient.java
+END
+RLoginClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/bsd/RLoginClient.java
+END

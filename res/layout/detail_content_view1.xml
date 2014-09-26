@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="#444444" >
+        </ImageView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/contents_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#111133">
+            </ImageView>
+            
+            <TextView 
+                android:id="@+id/contents_date1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="(07/07)"/>
+            
+            <TextView 
+                android:id="@+id/contents_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:layout_marginLeft="5dp"
+                android:text="KBS뉴스9"/>
+            
+            <TextView
+                android:id="@+id/contents_playtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:layout_marginLeft="20dp"
+                android:text="59분"/>
+            
+            <ImageView
+                android:id="@+id/contents_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:layout_marginLeft="5dp"
+                android:background="#111122"
+                android:text="All"/>
+            
+            <ImageView
+                android:id="@+id/contents_broad_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"    
+                android:background="#111144"            
+                android:layout_marginLeft="5dp"
+                android:text="Stereo"/>
+            
+            <TextView
+                android:id="@+id/contents_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:layout_marginLeft="5dp"
+                android:text="100원"/>
+        </LinearLayout>
+        
+        <LinearLayout 
+            android:id="@+id/layout2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout1"
+            android:layout_marginTop="30dp">
+            
+            <TextView
+                android:id="@+id/contents_chanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:layout_marginLeft="5dp"
+                android:text="ch.22416"/>
+            
+        </LinearLayout>
+        
+        <LinearLayout 
+            android:id="@+id/layout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"            
+            android:layout_below="@id/layout2"
+            android:orientation="horizontal">
+            
+            <TextView 
+                android:id="@+id/contents_date2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="(07/07)"/>
+            
+            <TextView 
+                android:id="@+id/contents_name2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"                
+                android:layout_marginLeft="5dp"
+                android:text="KBS뉴스9"/>
+            
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repos/asf/!svn/ver/1586986/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util
+END
+ListenerList.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/ListenerList.java
+END
+SubnetUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/SubnetUtils.java
+END
+Base64.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/repos/asf/!svn/ver/1586986/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/Base64.java
+END
+KeyManagerUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/KeyManagerUtils.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/package-info.java
+END
+SSLContextUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1525314/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/SSLContextUtils.java
+END
+Charsets.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/repos/asf/!svn/ver/1489595/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/Charsets.java
+END
+TrustManagerUtils.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/util/TrustManagerUtils.java
+END

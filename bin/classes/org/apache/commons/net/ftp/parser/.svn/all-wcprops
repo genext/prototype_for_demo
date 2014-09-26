@@ -1,0 +1,125 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser
+END
+CompositeFileEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/CompositeFileEntryParser.java
+END
+RegexFTPFileEntryParserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/asf/!svn/ver/1586986/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/RegexFTPFileEntryParserImpl.java
+END
+MacOsPeterFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/MacOsPeterFTPEntryParser.java
+END
+OS2FTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/OS2FTPEntryParser.java
+END
+FTPTimestampParserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/FTPTimestampParserImpl.java
+END
+OS400FTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/repos/asf/!svn/ver/1586986/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/OS400FTPEntryParser.java
+END
+NetwareFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/repos/asf/!svn/ver/1570207/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/NetwareFTPEntryParser.java
+END
+MVSFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/asf/!svn/ver/1490237/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/MVSFTPEntryParser.java
+END
+VMSFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/VMSFTPEntryParser.java
+END
+FTPFileEntryParserFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/FTPFileEntryParserFactory.java
+END
+VMSVersioningFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/repos/asf/!svn/ver/1570207/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/VMSVersioningFTPEntryParser.java
+END
+MLSxEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/MLSxEntryParser.java
+END
+ParserInitializationException.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/ParserInitializationException.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 118
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/package-info.java
+END
+DefaultFTPFileEntryParserFactory.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/repos/asf/!svn/ver/1586975/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/DefaultFTPFileEntryParserFactory.java
+END
+NTFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/repos/asf/!svn/ver/1574571/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/NTFTPEntryParser.java
+END
+FTPTimestampParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/FTPTimestampParser.java
+END
+ConfigurableFTPFileEntryParserImpl.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/repos/asf/!svn/ver/1574560/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/ConfigurableFTPFileEntryParserImpl.java
+END
+UnixFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/UnixFTPEntryParser.java
+END
+EnterpriseUnixFTPEntryParser.java
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/ftp/parser/EnterpriseUnixFTPEntryParser.java
+END

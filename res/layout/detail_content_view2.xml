@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="#444444" >
+        </ImageView>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/layout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/contents_type"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#111133" >
+            </ImageView>
+
+            <TextView
+                android:id="@+id/contents_name1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="트로트의 연인" />
+
+            <TextView
+                android:id="@+id/contents_playtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="59분" />
+
+            <ImageView
+                android:id="@+id/contents_limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="#111122"
+                android:text="All" />
+
+            <ImageView
+                android:id="@+id/contents_broad_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:background="#111144"
+                android:text="Stereo" />
+
+            <TextView
+                android:id="@+id/contents_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="100원" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/layout1"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/left_scroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="L" />
+            
+            <HorizontalScrollView 
+                android:id="@+id/scroll_layout"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" 
+                android:scrollbars="none">
+            </HorizontalScrollView >            
+
+            <Button
+                android:id="@+id/right_scroll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="R" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout2"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/contents_chanel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="001회" />
+
+            <TextView
+                android:id="@+id/contents_episode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="ch.22416" />
+
+            <TextView
+                android:id="@+id/contents_broadcast_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="14.06.23.월" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout3"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/contents_director"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="감독:이재상 이은진/" />
+
+            <TextView
+                android:id="@+id/contents_actor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="출연:지현우 정은지 신성록 이세.." />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout4"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/contents_story"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="대한 민국 최고의 스타 장현준은 마라톤 대회에서 대리 선수를 이용해서 완주 메달을 받고 이를 알게 된 과거 마라톤 유망주 춘희는" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

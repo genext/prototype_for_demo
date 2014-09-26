@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/repos/asf/!svn/ver/1593166/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp
+END
+SMTPReply.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/SMTPReply.java
+END
+SMTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1587072/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/SMTPClient.java
+END
+SMTPCommand.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1587072/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/SMTPCommand.java
+END
+SMTP.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/repos/asf/!svn/ver/1587072/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/SMTP.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/package-info.java
+END
+SMTPSClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/repos/asf/!svn/ver/1593166/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/SMTPSClient.java
+END
+SimpleSMTPHeader.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/asf/!svn/ver/1587072/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/SimpleSMTPHeader.java
+END
+RelayPath.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/repos/asf/!svn/ver/1587072/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/RelayPath.java
+END
+AuthenticatingSMTPClient.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/asf/!svn/ver/1587071/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/AuthenticatingSMTPClient.java
+END
+SMTPConnectionClosedException.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/smtp/SMTPConnectionClosedException.java
+END

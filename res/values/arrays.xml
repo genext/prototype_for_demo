@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="menu">
+        <item>HOME</item>
+        <item>MBC</item>
+        <item>KBS</item>
+        <item>SBS</item>
+        <item>CJ</item>
+        <item>영화</item>
+        <item>명작드라마</item>
+    </string-array>
+    <string-array name="home">
+        <item>TV추천</item>
+        <item>오늘의 News</item>
+        <item>메뉴얼</item>
+    </string-array>
+    <string-array name="kbs">
+        <item>뉴스</item>
+        <item>드라마</item>
+        <item>예능</item>
+        <item>시사교양</item>
+        <item>종영드라마</item>
+        <item>종영작</item>
+        <item>특집</item>
+    </string-array>
+    <string-array name="mbc">
+        <item>뉴스</item>
+        <item>드라마</item>
+        <item>예능</item>
+        <item>시사교양</item>
+        <item>종영드라마</item>
+        <item>종영작</item>
+        <item>특집</item>
+    </string-array>
+    <string-array name="sbs">
+        <item>뉴스</item>
+        <item>드라마</item>
+        <item>예능</item>
+        <item>시사교양</item>
+        <item>종영드라마</item>
+        <item>종영작</item>
+        <item>특집</item>
+    </string-array>
+    <string-array name="cj">
+        <item>뉴스</item>
+        <item>드라마</item>
+        <item>예능</item>
+        <item>시사교양</item>
+        <item>종영드라마</item>
+        <item>종영작</item>
+        <item>특집</item>
+    </string-array>
+    <string-array name="movie">
+        <item>뉴스</item>
+        <item>드라마</item>
+        <item>예능</item>
+        <item>시사교양</item>
+        <item>종영드라마</item>
+        <item>종영작</item>
+        <item>특집</item>
+    </string-array>
+    <string-array name="etc">
+        <item>뉴스</item>
+        <item>드라마</item>
+        <item>예능</item>
+        <item>시사교양</item>
+        <item>종영드라마</item>
+        <item>종영작</item>
+        <item>특집</item>
+    </string-array>
+</resources>

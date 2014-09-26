@@ -1,0 +1,95 @@
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io
+END
+ToNetASCIIOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/ToNetASCIIOutputStream.java
+END
+DotTerminatedMessageWriter.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/DotTerminatedMessageWriter.java
+END
+CopyStreamException.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/CopyStreamException.java
+END
+Util.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/repos/asf/!svn/ver/1587002/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/Util.java
+END
+FromNetASCIIInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/repos/asf/!svn/ver/1489646/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/FromNetASCIIInputStream.java
+END
+FromNetASCIIOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/FromNetASCIIOutputStream.java
+END
+CRLFLineReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/CRLFLineReader.java
+END
+package-info.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/package-info.java
+END
+SocketInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/SocketInputStream.java
+END
+SocketOutputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/SocketOutputStream.java
+END
+CopyStreamAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/repos/asf/!svn/ver/1489361/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/CopyStreamAdapter.java
+END
+CopyStreamEvent.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/CopyStreamEvent.java
+END
+DotTerminatedMessageReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/repos/asf/!svn/ver/1301276/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/DotTerminatedMessageReader.java
+END
+CopyStreamListener.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/repos/asf/!svn/ver/1299238/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/CopyStreamListener.java
+END
+ToNetASCIIInputStream.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/repos/asf/!svn/ver/1439708/commons/proper/net/trunk/src/main/java/org/apache/commons/net/io/ToNetASCIIInputStream.java
+END
