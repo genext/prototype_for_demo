@@ -36,6 +36,7 @@ import android.widget.TextView;
 import com.example.proto.R;
 import com.example.proto.dao.ContentsDownDAO;
 import com.example.proto.dao.ContentsPayAmountDAO;
+import com.example.proto.dao.ContentsPayResultDAO;
 
 import com.example.proto.dao.SimpleDAO;
 import com.example.proto.dao.json.MenuJSON;
@@ -87,7 +88,8 @@ public class MainActivity extends Activity implements
 	
 	private MenuJSON menuDAO;//메뉴 정보
 	private ProgramJSON programJSON;//프로그램 리스트 정보
-	private List <ProgramJSON.Program> leftProgram = new ArrayList<ProgramJSON.Program>();
+	// TODO 두번째 메뉴별로 programJSON을 연결하여 저장해야 함. map을 이용?
+	private List <ProgramJSON.Program> leftProgram = new ArrayList<ProgramJSON.Program>(); // TODO 이건 처음에 null일텐데? 할당에서 에러가 안 나나?
 	private List <ProgramJSON.Program> rightProgram = new ArrayList<ProgramJSON.Program>();
 
 	private ProgramInfoJSON programInfoJSON;//프로그램 상세 정보
@@ -348,7 +350,7 @@ public class MainActivity extends Activity implements
 	 * </PRE>
 	 * @param menuCode 선택된 두번째 메뉴 코드
 	 */
-	private void invalidateProgramList(final String menuCode){
+	private void invalidateProgramList(final String secondMenuCode){
 		
 		boolean isExpiredObject; //프로그램 리스트가 갱신한지 1시간이 지났는지 체크하는 변수
 		
@@ -365,7 +367,7 @@ public class MainActivity extends Activity implements
 		if(isExpiredObject){
 			//socket으로 데이터 요청(program_list)
 			Packet packet = new Packet(Packet.H3, Packet.OPTION_H3_PROGRAM);//패킷 종류 선택 			
-	        packet.createPacketData(Prefs.getString("CERTKEY", null), menuCode);//패킷 데이터 입력 (인증키, 메뉴 코드)      
+	        packet.createPacketData(Prefs.getString("CERTKEY", null), secondMenuCode);//패킷 데이터 입력 (인증키, 메뉴 코드)      
 
 	        
 			SocketRequest.objectRequest(SocketRequest.SERV_IP, //서버 ip
@@ -401,6 +403,7 @@ public class MainActivity extends Activity implements
 	  		        	
 	  		      });			
 		}else{
+			
 			setProgramListData(currentProgramPage,  programJSON.getPrograms().size());
 		}	
 		
@@ -803,13 +806,14 @@ public class MainActivity extends Activity implements
 														
 														@Override
 														public void onClick(DialogInterface dialog, int which) {
-															// TODO file id 얻어오기 구현
+															notifyPayment(curContentsId, true);
 															
 														}
 													}).setNegativeButton("아니오",  new DialogInterface.OnClickListener() {
 														
 														@Override
 														public void onClick(DialogInterface dialog, int which) {
+															notifyPayment(curContentsId, false);
 															dialog.cancel();
 														}
 													});
@@ -820,7 +824,7 @@ public class MainActivity extends Activity implements
 												detailLayout.setVisibility(View.GONE);
 												menuLayout.setVisibility(View.GONE);
 												// TODO check pay and process it.
-												notifyPayment(curContentsId);
+												notifyPayment(curContentsId, true);
 												//requestContentsdownInfo(contentsId);
 											}
 											else {
@@ -850,9 +854,44 @@ public class MainActivity extends Activity implements
 		menuLayout.setVisibility(View.GONE);
 	}
 
-	private void notifyPayment(final long contentsFieldId)
+	private void notifyPayment(final long contentsFieldId, boolean payment)
 	{
 		// TODO 여기서 requestContentDownInfo를 호출해야 함.
+		//해당 프로그램 결제 요청
+		Packet packet = new Packet(Packet.PAY, Packet.OPTION_NONE);//패킷 종류 선택 
+				
+		packet.createPacketData(Prefs.getString("CERTKEY", null), contentsFieldId);//패킷 데이터 입력 (인증키, 컨텐츠코드)    
+		SocketRequest.objectRequest(SocketRequest.SERV_IP, //서버 ip
+				  SocketRequest.PORT,     //서버 port
+				  packet,                 //전송할 데이터
+				  ContentsPayResultDAO.class, //리턴 받을 객체 타입 선언
+				  new OnSocketResponceListener<ContentsPayResultDAO>(){//전송이 성공하였을 경우 listener
+
+						@Override
+						public void onResponce(ContentsPayResultDAO object) {
+							// TODO Auto-generated method stub
+							if(object != null){												
+								detailLayout.setVisibility(View.GONE);
+								menuLayout.setVisibility(View.GONE);
+								requestContentsdownInfo(object.getFileID());
+							}
+							else {
+								// TODO 에러 처리.
+								MyLog.d("object is null!");
+							}
+							
+						}
+		        	
+		      },  new OnSocketErrorListener<ContentsPayResultDAO>(){//전송이 실패하였을 경우 listener
+
+						@Override
+						public void onError(int failCode, ContentsPayResultDAO object) {
+							// TODO Auto-generated method stub
+							MyLog.d("socket error : %d", failCode);
+						}
+		        	
+		      });	
+
 	}
 
 	
