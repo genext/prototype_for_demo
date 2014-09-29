@@ -3,7 +3,7 @@ package com.example.proto.socket;
 public class Packet implements PacketFactory{
 	
 	//agent type 정의(코드값 정의)
-	public final static int H1 = 0;//셋탑 설치 후 첫 인증 요청(코드 : 1000)
+	public final static int CERT = 0;//셋탑 설치 후 첫 인증 요청(코드 : 1000)
 	public final static int H2 = 1;//인증 요청(코드 : 1001)
 	public final static int H3 = 2;//데이터 요청(menu, program list, program detail, ad list)
 	public final static int PAY = 3;
@@ -40,8 +40,8 @@ public class Packet implements PacketFactory{
 			throws InvalidPacketAgentType {
 		// TODO Auto-generated method stub		
 		switch(agentType){
-		case H1 :
-			return agent = new H1Agent(option);
+		case CERT :
+			return agent = new CertAgent(option);
 		case H2 :
 			return agent = new H2Agent(option);
 		case H3 :

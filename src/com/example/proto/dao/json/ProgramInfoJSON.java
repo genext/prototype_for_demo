@@ -56,12 +56,21 @@ public class ProgramInfoJSON extends ExpiredCheckableObject{
 	}
 
 	public class Detail{
+		private int no;
 		private String title;
 		private long id;
 		private String duration;
-		private int price;
+		// TODO 테스트할 때 에러가 난다면 double을 받아오는지 확인한 것.
+		private double price;
 		private String channel;
 		private String explanation;
+
+		public int getNo() {
+			return no;
+		}
+		public void setNo(int no) {
+			this.no = no;
+		}
 
 		public String getTitle() {
 			return title;
@@ -69,13 +78,7 @@ public class ProgramInfoJSON extends ExpiredCheckableObject{
 		public void setTitle(String title) {
 			this.title = title;
 		}
-/**
-		 * @param no the no to set
-		 */
-/*		public void setNo(int no) {
-			this.no = no;
-		}		
-*/		/**
+		/**
 		 * @return the id
 		 */
 		public long getId() {
@@ -102,7 +105,7 @@ public class ProgramInfoJSON extends ExpiredCheckableObject{
 		/**
 		 * @return the price
 		 */
-		public int getPrice() {
+		public double getPrice() {
 			return price;
 		}
 		/**

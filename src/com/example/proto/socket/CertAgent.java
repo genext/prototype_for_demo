@@ -10,18 +10,17 @@ import com.example.proto.dto.SocketDTO;
 import com.example.proto.util.Tools;
 
 
-public class H1Agent extends PacketAgent{	
+public class CertAgent extends PacketAgent{	
 	
 	private static final int CODE = 1000;
 
-	protected H1Agent(int option) {
+	protected CertAgent(int option) {
 		super(option);
 		
 	}
 
 	@Override
 	protected void createPacketData(Object... params) {
-		// TODO Auto-generated method stub
 		
 		//params를 확인해서 해당 코드의 패킷이 아닐 경우 exception 발생해야 함(InvalidPacketAgentParameter)
 		

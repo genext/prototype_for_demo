@@ -765,9 +765,13 @@ public class MainActivity extends Activity implements
 			MyOrderButton btn[] = new MyOrderButton[programDetailCount];
 			for (int i = 0; i < btn.length; i++) {		
 				ProgramInfoJSON.Detail detail = programInfoJSON.getDetails().get(i);
+				if (i + 1 != detail.getNo()) {
+					// TODO 다양한 경우의 수를 테스트해볼 것..
+					continue;
+				}
 				btn[i] = new MyOrderButton(this);
 				btn[i].setDistintId(detail.getId());
-				btn[i].setNo(i);
+				btn[i].setNo(detail.getNo());
 				btn[i].setText(Integer.toString(i));
 				btn[i].setBackgroundResource(R.drawable.btn);
 				btn[i].setLayoutParams(btnParams);				
@@ -782,9 +786,9 @@ public class MainActivity extends Activity implements
 						
 						//해당 프로그램 결제 요청
 						Packet packet = new Packet(Packet.PAY, Packet.OPTION_NONE);//패킷 종류 선택 
-						long contentsId = ((MyOrderButton) view).getDistintId();
+						curContentsId = ((MyOrderButton) view).getDistintId();
 						
-						packet.createPacketData(Prefs.getString("CERTKEY", null), contentsId);//패킷 데이터 입력 (인증키, 프로그램 코드)    
+						packet.createPacketData(Prefs.getString("CERTKEY", null), curContentsId);//패킷 데이터 입력 (인증키, 프로그램 코드)    
 						currentProgramInfo = programInfoJSON.getDetails().get(((MyOrderButton)view).getNo());
 						SocketRequest.objectRequest(SocketRequest.SERV_IP, //서버 ip
 								  SocketRequest.PORT,     //서버 port
@@ -806,14 +810,14 @@ public class MainActivity extends Activity implements
 														
 														@Override
 														public void onClick(DialogInterface dialog, int which) {
-															notifyPayment(curContentsId, true);
+															notifyPayment(true);
 															
 														}
 													}).setNegativeButton("아니오",  new DialogInterface.OnClickListener() {
 														
 														@Override
 														public void onClick(DialogInterface dialog, int which) {
-															notifyPayment(curContentsId, false);
+															notifyPayment(false);
 															dialog.cancel();
 														}
 													});
@@ -821,10 +825,10 @@ public class MainActivity extends Activity implements
 													alert.setTitle("유료 컨텐츠");
 													alert.show();
 												}
-												detailLayout.setVisibility(View.GONE);
-												menuLayout.setVisibility(View.GONE);
+												//detailLayout.setVisibility(View.GONE);
+												//menuLayout.setVisibility(View.GONE);
 												// TODO check pay and process it.
-												notifyPayment(curContentsId, true);
+												notifyPayment(true);
 												//requestContentsdownInfo(contentsId);
 											}
 											else {
@@ -854,13 +858,18 @@ public class MainActivity extends Activity implements
 		menuLayout.setVisibility(View.GONE);
 	}
 
-	private void notifyPayment(final long contentsFieldId, boolean payment)
+	private void notifyPayment(boolean payment)
 	{
 		// TODO 여기서 requestContentDownInfo를 호출해야 함.
 		//해당 프로그램 결제 요청
 		Packet packet = new Packet(Packet.PAY, Packet.OPTION_NONE);//패킷 종류 선택 
 				
-		packet.createPacketData(Prefs.getString("CERTKEY", null), contentsFieldId);//패킷 데이터 입력 (인증키, 컨텐츠코드)    
+		if (payment == true) {
+			packet.createPacketData(Prefs.getString("CERTKEY", null), curContentsId);//패킷 데이터 입력 (인증키, 컨텐츠코드)    			
+		}
+		else {
+			packet.createPacketData(Prefs.getString("CERTKEY", null), 0);//패킷 데이터 입력 (인증키, 0)    						
+		}
 		SocketRequest.objectRequest(SocketRequest.SERV_IP, //서버 ip
 				  SocketRequest.PORT,     //서버 port
 				  packet,                 //전송할 데이터
@@ -870,10 +879,12 @@ public class MainActivity extends Activity implements
 						@Override
 						public void onResponce(ContentsPayResultDAO object) {
 							// TODO Auto-generated method stub
-							if(object != null){												
-								detailLayout.setVisibility(View.GONE);
-								menuLayout.setVisibility(View.GONE);
-								requestContentsdownInfo(object.getFileID());
+							if(object != null){
+								if (object.getFileID() != 0) {
+									detailLayout.setVisibility(View.GONE);
+									menuLayout.setVisibility(View.GONE);
+									requestContentsdownInfo(object.getFileID());									
+								}
 							}
 							else {
 								// TODO 에러 처리.

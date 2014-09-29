@@ -159,7 +159,7 @@ public class SocketTask<T> extends AsyncTask<Void, Void, T>{
 			int resultCode = packet.getResult();
 			
 			//프로토콜 마다 성공 메시지가 동일하다면 Packet 클래스에서 한번에 처리 가능, 현재 서버에서 지원하지 않으므로 하드 코딩 해서 처리..악!!		
-			if(agnetType == Packet.H1 || agnetType == Packet.H2){
+			if(agnetType == Packet.CERT || agnetType == Packet.H2){
 				if(resultCode == 1){//성공
 					if(listener != null){
 						listener.onResponce(object);

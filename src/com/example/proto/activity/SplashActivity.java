@@ -50,7 +50,8 @@ public class SplashActivity extends Activity{
 	private static final String TVBOGO_CONFIG = "tvbogo_config";
 	private ProgressBar spinner;
 	private String MacAddress;
-	private DialogFragment newFragment;
+	private DialogFragment loginFragment;
+	private DialogFragment networkAlertFragment;
 	private SharedPreferences config;
 	private String md5Hex;
 	
@@ -68,31 +69,41 @@ public class SplashActivity extends Activity{
 		
 		// TODO check network : not only wife but also ethernet
     	ConnectivityManager conn = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-    	MyLog.d("get wireless info");
-    	//NetworkInfo wireless = conn.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET); TODO why does this code crashes?
-    	NetworkInfo wifi = conn.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
     	
-    	if (!wifi.isConnected()) {
-    		// TODO : error process and stop.
-    		MyLog.d("tvbogo", "wifi not connected");
-    	}
     	
-/*    	if (!wireless.isConnected()) {
-    		MyLog.d("tvbogo", "wireless not connected");    		
+    	if (conn.getActiveNetworkInfo() != null) {
+    		NetworkInfo activeNetwork = conn.getActiveNetworkInfo();
+    		
+    		switch (activeNetwork.getType()) {
+    		case ConnectivityManager.TYPE_WIFI:
+    			MyLog.d("wifi activated");
+    	    	// read Mac Address
+    			WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+    			WifiInfo info = manager.getConnectionInfo();
+    			MacAddress = info.getMacAddress();
+    			MyLog.d("wifi mac address:" + MacAddress);
+    			break;
+    		case ConnectivityManager.TYPE_ETHERNET:
+    			MyLog.d("wired activated");
+    			String ethernetMac = getEthernetMacAddress();
+    			MyLog.d("ethernet mac address : %s", ethernetMac.toString());     			
+    			break;
+    		default:
+    				
+    		}
     	}
-*/    	
-    	// read Mac Address
-		WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
-		WifiInfo info = manager.getConnectionInfo();
-		MacAddress = info.getMacAddress();
-		Log.d("tvbogo", "mac address:" + MacAddress);
+    	else {
+    		// TODO 네트웍 불통을 알려야 한다.
+    		MyLog.d("no active network");
+    		networkAlertFragment = new NetworkAlertDialogFragment();
+    		showDialogFragment(networkAlertFragment);
+    	}
+
 		
-		String ethernetMac = getMacAddress();
-		MyLog.d("ethernet mac address : %s", ethernetMac.toString()); 
 		
 		// TODO 셋탑박스의 wifi가 안 켜져 있으면 랜선이 연결되어 있는데도 앱이 바로 죽어버림. 이걸 회피하도록...
 		//요부분 쉽게 가져다 쓸수 있게 Singleton 형태로 만들어 놨습니다. com.example.proto.Prefs
-		//Splash부분은 어떻게 수정하실지 몰라서 최대한 원본 그대로 유지했습니다.  // jkoh 이게 무슨 말인지 이해가 안 감.
+		//Splash부분은 어떻게 수정하실지 몰라서 최대한 원본 그대로 유지했습니다.
 		
 		// read config 
 		config = getSharedPreferences(TVBOGO_CONFIG, MODE_PRIVATE);
@@ -101,28 +112,29 @@ public class SplashActivity extends Activity{
 		if (CertificateKey == null) {
 			Log.d("tvbogo", "no cert key so save id/passwd");
 			// id/password dialog box
-			newFragment = new LoginDialogFragment();
-	    	showDialogFragment(newFragment);
+			loginFragment = new LoginDialogFragment();
+	    	showDialogFragment(loginFragment);
 			// TODO 셋탑에서 저장된 인증키를 얻을 수 없이 이미 이전에 인증키를 서버에서 부여한 경우에는 서버쪽에서 인증키가 남아 있다. 이 때에는 로그인 아이디를 입력하더라도 인증키를 새로 만들어주는 것이 아니라 서버에서 이미 등록된 인증키가 있다고 알려준다.
 	    	// 이럴 경우에 대한 처리 로직 추가 필요.
 
 		}
 		else {
-/*			LoginId = config.getString("loginid", null);			
-		    Log.d("tvbogo", "id : " + LoginId);
-			if (LoginId == null) {
-			}
-			Password = config.getString("password", null);
-		    Log.d("tvbogo", "passwd : " + Password);
-			if (Password == null) {
-			}	
-*/			
 			spinner.setVisibility(View.GONE);																	
 			startActivity(new Intent(SplashActivity.this,MainActivity.class));
             finish();
 		}
 		
-		//registerService(); TODO uncomment this line when you are ready.
+		//registerService(); //TODO uncomment this line when you are ready.
+	}
+	
+	public class NetworkAlertDialogFragment extends DialogFragment {
+
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			// TODO Auto-generated method stub
+			return super.onCreateDialog(savedInstanceState);
+		}
+		
 	}
 	
 	public class LoginDialogFragment extends DialogFragment {
@@ -189,9 +201,8 @@ public class SplashActivity extends Activity{
         				
         				editor.putString("password",  md5Hex);
         				editor.commit();     		        
-        		        MyLog.d("id : %s passwd : %s", strLoginid, strPassword1);
         		        //socket으로 데이터 요청(인증 요청 1000)
-        				Packet packet = new Packet(Packet.H1, Packet.OPTION_NONE);//패킷 종류 선택         		             		        
+        				Packet packet = new Packet(Packet.CERT, Packet.OPTION_NONE);//패킷 종류 선택         		             		        
         		        packet.createPacketData(strLoginid, md5Hex.substring(0, 16), MacAddress);//패킷 데이터 입력       		        
         		        
         		        SocketRequest.objectRequest(SocketRequest.SERV_IP, //서버 ip
@@ -215,14 +226,99 @@ public class SplashActivity extends Activity{
 																public void onError(int failCode, CertificationKeyDAO object) {
 																	// TODO 프로그램 끝내도록...
 																	MyLog.d("socket error : %d", failCode);
-																	if (failCode == 7) { // TODO 코드 관리 체계 정리. 서버처럼 프로토콜변로 따로 관리.
+																	switch (failCode) {
+																	// TODO hardcode number를 코드화
+																	case 0:
+																	case 2:
+																		new AlertDialog.Builder(getApplicationContext())
+																		.setTitle("알림")
+																		.setMessage("고객 센터에 문의하시기 바랍니다.")
+																		.setPositiveButton("확인",
+																				new DialogInterface.OnClickListener() {
+																					public void onClick(DialogInterface dialog,
+																							int whichButton) {
+																						dialog.dismiss();
+																					}
+																				}).show();
+																		break;
+																	case 3:
+																		new AlertDialog.Builder(getApplicationContext())
+																		.setTitle("알림")
+																		.setMessage("사용이 정지된 아이디입니다. 사용정지를 해제하십시오.")
+																		.setPositiveButton("확인",
+																				new DialogInterface.OnClickListener() {
+																					public void onClick(DialogInterface dialog,
+																							int whichButton) {
+																						dialog.dismiss();
+																					}
+																				}).show();
+																		break;
+																	case 4:
+																		new AlertDialog.Builder(getApplicationContext())
+																		.setTitle("알림")
+																		.setMessage("일치하는 아이디가 없습니다.")
+																		.setPositiveButton("확인",
+																				new DialogInterface.OnClickListener() {
+																					public void onClick(DialogInterface dialog,
+																							int whichButton) {
+																						dialog.dismiss();
+																					}
+																				}).show();
+																		break;
+																	case 5:
+																		new AlertDialog.Builder(getApplicationContext())
+																		.setTitle("알림")
+																		.setMessage("비밀번호가 다릅니다.")
+																		.setPositiveButton("확인",
+																				new DialogInterface.OnClickListener() {
+																					public void onClick(DialogInterface dialog,
+																							int whichButton) {
+																						dialog.dismiss();
+																					}
+																				}).show();
+																		break;
+																	case 6:
+																		new AlertDialog.Builder(getApplicationContext())
+																		.setTitle("알림")
+																		.setMessage("인증키 생성에 실패했습니다. 다시 시도해주십시오.")
+																		.setPositiveButton("확인",
+																				new DialogInterface.OnClickListener() {
+																					public void onClick(DialogInterface dialog,
+																							int whichButton) {
+																						dialog.dismiss();
+																					}
+																				}).show();
+																		break;
+																	case 7:
 																		SharedPreferences.Editor editor = config.edit();
 																		editor.putString("CERTKEY", object.getCertKey());
 																		editor.commit();
-																		MyLog.d("certkey even if error 7 : %s", object.getCertKey().toString());
-																		spinner.setVisibility(View.GONE);	
-																		startMainActivity();
-																		
+																		new AlertDialog.Builder(getApplicationContext())
+																		.setTitle("알림")
+																		.setMessage("이미 등록된 셋탑입니다.")
+																		.setPositiveButton("확인",
+																				new DialogInterface.OnClickListener() {
+																					public void onClick(DialogInterface dialog,
+																							int whichButton) {
+																						dialog.dismiss();
+																						spinner.setVisibility(View.GONE);	
+																						startMainActivity();
+																					}
+																				}).show();
+																		break;
+																	case 8:
+																		new AlertDialog.Builder(getApplicationContext())
+																		.setTitle("알림")
+																		.setMessage("다른 사용자에게 등록된 셋탑입니다. 고객선터에 문의하시기 바랍니다.")
+																		.setPositiveButton("확인",
+																				new DialogInterface.OnClickListener() {
+																					public void onClick(DialogInterface dialog,
+																							int whichButton) {
+																						dialog.dismiss();
+																					}
+																				}).show();
+																		break;
+
 																	}
 																}
 									        		        	
@@ -248,6 +344,7 @@ public class SplashActivity extends Activity{
 	
 	//특정시간에 background에서 광고 영상 가져오도록 service 등록
 	public void registerService(){
+		MyLog.d("start registerService");
 		Intent intent = new Intent(this, AdvertisementService.class);
 		PendingIntent sender = PendingIntent.getService(this, 0, intent, 0);		
 		
@@ -277,7 +374,7 @@ public class SplashActivity extends Activity{
 	/*
 	 * Get the STB MacAddress
 	 */
-	public String getMacAddress(){
+	public String getEthernetMacAddress(){
 	    try {
 	        return loadFileAsString("/sys/class/net/eth0/address")
 	            .toUpperCase().substring(0, 17);
