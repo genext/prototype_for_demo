@@ -85,8 +85,8 @@ public class SplashActivity extends Activity{
     			break;
     		case ConnectivityManager.TYPE_ETHERNET:
     			MyLog.d("wired activated");
-    			String ethernetMac = getEthernetMacAddress();
-    			MyLog.d("ethernet mac address : %s", ethernetMac.toString());     			
+    			MacAddress = getEthernetMacAddress();
+    			MyLog.d("ethernet mac address : %s", MacAddress.toString());     			
     			break;
     		default:
     				
@@ -132,7 +132,22 @@ public class SplashActivity extends Activity{
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			// TODO Auto-generated method stub
-			return super.onCreateDialog(savedInstanceState);
+    		LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+    		final View layout = inflater.inflate(R.layout.net_alert, (ViewGroup) getActivity().findViewById(R.id.net_msg));
+
+    		final TextView msg = (TextView) layout.findViewById(R.id.warning);
+    		msg.setText("네트웍이 사용가능한 상태가 아닙니다.");
+
+    		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+    		builder.setView(layout);
+    		// Now configure the AlertDialog
+    		builder.setTitle("네ㅌ웍 경고");
+    		builder.setCancelable(false);
+    		builder.setPositiveButton("확인",  null);
+    		
+    		// Create the AlertDialog and show it
+    		AlertDialog netAlertDialog = builder.create();
+    		return netAlertDialog;
 		}
 		
 	}
