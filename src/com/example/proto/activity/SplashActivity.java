@@ -4,7 +4,11 @@ package com.example.proto.activity;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.Date;
+import java.util.Enumeration;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -23,9 +27,12 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.Formatter;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,6 +74,20 @@ public class SplashActivity extends Activity{
 		spinner = (ProgressBar) findViewById(R.id.progress);
 		spinner.setIndeterminate(true);
 		
+		// system info
+		// cpu, manufacturer, model name, serial no, version
+		String strMessage = "CPU_ABI: "+Build.CPU_ABI + "\nBrand: " + Build.BRAND + "\nModel: " + Build.MODEL + "\nSerial: " + Build.SERIAL
+				+ "\nVersion: " + Build.VERSION.RELEASE;
+		MyLog.d("system info : %s", strMessage);
+		
+		// monitor info
+		DisplayMetrics disMetrics = getResources().getDisplayMetrics();
+		String strDisplayInfo = "Display Width: " + disMetrics.widthPixels + "\nDisplay Height: " + disMetrics.heightPixels
+				+ "\nDisplayDpi: " + disMetrics.densityDpi + "\nHorizental Size: " + (float)disMetrics.widthPixels / (float)disMetrics.densityDpi
+				+ "\nVertical Size: " + (float)disMetrics.heightPixels / (float)disMetrics.densityDpi;
+		
+		MyLog.d("monitor info : %s", strDisplayInfo);
+		
 		// TODO check network : not only wife but also ethernet
     	ConnectivityManager conn = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
     	
@@ -81,12 +102,14 @@ public class SplashActivity extends Activity{
     			WifiManager manager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
     			WifiInfo info = manager.getConnectionInfo();
     			MacAddress = info.getMacAddress();
-    			MyLog.d("wifi mac address:" + MacAddress);
+    			int ipAddress = info.getIpAddress();
+    			String ip = String.format("%d.%d.%d.%d",  (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
+    			MyLog.d("wifi mac address: %s ip address : %s", MacAddress, ip);
     			break;
     		case ConnectivityManager.TYPE_ETHERNET:
     			MyLog.d("wired activated");
     			MacAddress = getEthernetMacAddress();
-    			MyLog.d("ethernet mac address : %s", MacAddress.toString());     			
+    			MyLog.d("ethernet mac address : %s ip address : %s", MacAddress.toString(), getLocalIpAddress());     			
     			break;
     		default:
     				
@@ -97,6 +120,7 @@ public class SplashActivity extends Activity{
     		MyLog.d("no active network");
     		networkAlertFragment = new NetworkAlertDialogFragment();
     		showDialogFragment(networkAlertFragment);
+    		finish();
     	}
 
 		
@@ -397,5 +421,23 @@ public class SplashActivity extends Activity{
 	        e.printStackTrace();
 	        return null;
 	    }
+	}
+	
+	public String getLocalIpAddress() {
+	    try {
+	        for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+	            NetworkInterface intf = en.nextElement();
+	            for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+	                InetAddress inetAddress = enumIpAddr.nextElement();
+	                if (!inetAddress.isLoopbackAddress()) {
+	                    String ip = Formatter.formatIpAddress(inetAddress.hashCode());
+	                    return ip;
+	                }
+	            }
+	        }
+	    } catch (SocketException ex) {
+	        MyLog.e(ex.toString());
+	    }
+	    return null;
 	}
 }
