@@ -51,15 +51,15 @@ import com.example.proto.socket.SocketRequest;
 import com.example.proto.socket.SocketTask.OnSocketErrorListener;
 import com.example.proto.socket.SocketTask.OnSocketResponceListener;
 import com.example.proto.util.MyLog;
+import com.example.proto.util.Prefs;
+
 
 public class SplashActivity extends Activity{
 
-	private static final String TVBOGO_CONFIG = "tvbogo_config";
 	private ProgressBar spinner;
 	private String MacAddress;
 	private DialogFragment loginFragment;
 	private DialogFragment networkAlertFragment;
-	private SharedPreferences config;
 	private String md5Hex;
 	
 	@Override
@@ -105,6 +105,7 @@ public class SplashActivity extends Activity{
     			int ipAddress = info.getIpAddress();
     			String ip = String.format("%d.%d.%d.%d",  (ipAddress & 0xff),(ipAddress >> 8 & 0xff),(ipAddress >> 16 & 0xff),(ipAddress >> 24 & 0xff));
     			MyLog.d("wifi mac address: %s ip address : %s", MacAddress, ip);
+    			// TODO ip address가 0.0.0.0인 경우도 처리할 것...이노디지털의 셋탑문제일까?
     			break;
     		case ConnectivityManager.TYPE_ETHERNET:
     			MyLog.d("wired activated");
@@ -114,48 +115,42 @@ public class SplashActivity extends Activity{
     		default:
     				
     		}
+    		// TODO 셋탑박스의 wifi가 안 켜져 있으면 랜선이 연결되어 있는데도 앱이 바로 죽어버림. 이걸 회피하도록...
+    		//Splash부분은 어떻게 수정하실지 몰라서 최대한 원본 그대로 유지했습니다.
+    		
+    		// read config 
+    		String CertificateKey = Prefs.getString("CERTKEY", null);
+    		
+    		if (CertificateKey == null) {
+    			Log.d("tvbogo", "no cert key so save id/passwd");
+    			// id/password dialog box
+    			loginFragment = new LoginDialogFragment();
+    	    	showDialogFragment(loginFragment);
+    			// TODO 셋탑에서 저장된 인증키를 얻을 수 없이 이미 이전에 인증키를 서버에서 부여한 경우에는 서버쪽에서 인증키가 남아 있다. 이 때에는 로그인 아이디를 입력하더라도 인증키를 새로 만들어주는 것이 아니라 서버에서 이미 등록된 인증키가 있다고 알려준다.
+    	    	// 이럴 경우에 대한 처리 로직 추가 필요.
+
+    		}
+    		else {
+    			spinner.setVisibility(View.GONE);																	
+    			startActivity(new Intent(SplashActivity.this,MainActivity.class));
+                finish();
+    		}
+    		
+    		//registerService(); //TODO uncomment this line when you are ready.
     	}
     	else {
     		// TODO 네트웍 불통을 알려야 한다.
     		MyLog.d("no active network");
     		networkAlertFragment = new NetworkAlertDialogFragment();
     		showDialogFragment(networkAlertFragment);
-    		finish();
     	}
 
-		
-		
-		// TODO 셋탑박스의 wifi가 안 켜져 있으면 랜선이 연결되어 있는데도 앱이 바로 죽어버림. 이걸 회피하도록...
-		//요부분 쉽게 가져다 쓸수 있게 Singleton 형태로 만들어 놨습니다. com.example.proto.Prefs
-		//Splash부분은 어떻게 수정하실지 몰라서 최대한 원본 그대로 유지했습니다.
-		
-		// read config 
-		config = getSharedPreferences(TVBOGO_CONFIG, MODE_PRIVATE);
-		String CertificateKey = config.getString("CERTKEY", null);
-		
-		if (CertificateKey == null) {
-			Log.d("tvbogo", "no cert key so save id/passwd");
-			// id/password dialog box
-			loginFragment = new LoginDialogFragment();
-	    	showDialogFragment(loginFragment);
-			// TODO 셋탑에서 저장된 인증키를 얻을 수 없이 이미 이전에 인증키를 서버에서 부여한 경우에는 서버쪽에서 인증키가 남아 있다. 이 때에는 로그인 아이디를 입력하더라도 인증키를 새로 만들어주는 것이 아니라 서버에서 이미 등록된 인증키가 있다고 알려준다.
-	    	// 이럴 경우에 대한 처리 로직 추가 필요.
-
-		}
-		else {
-			spinner.setVisibility(View.GONE);																	
-			startActivity(new Intent(SplashActivity.this,MainActivity.class));
-            finish();
-		}
-		
-		//registerService(); //TODO uncomment this line when you are ready.
 	}
 	
 	public class NetworkAlertDialogFragment extends DialogFragment {
 
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
-			// TODO Auto-generated method stub
     		LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     		final View layout = inflater.inflate(R.layout.net_alert, (ViewGroup) getActivity().findViewById(R.id.net_msg));
 
@@ -165,9 +160,14 @@ public class SplashActivity extends Activity{
     		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
     		builder.setView(layout);
     		// Now configure the AlertDialog
-    		builder.setTitle("네ㅌ웍 경고");
+    		builder.setTitle("네트웍 경고");
     		builder.setCancelable(false);
-    		builder.setPositiveButton("확인",  null);
+    		builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+    			@Override
+    			public void onClick(DialogInterface dialog, int which) {
+    				finish();
+    			}
+    		});
     		
     		// Create the AlertDialog and show it
     		AlertDialog netAlertDialog = builder.create();
@@ -230,16 +230,14 @@ public class SplashActivity extends Activity{
     		        String strPassword1 = p2.getText().toString();
     		        String strPassword2 = p3.getText().toString();
     		        if (strPassword1.equals(strPassword2)) {
-        				SharedPreferences.Editor editor = config.edit();
         				strLoginid = "dmadb33";
-        				editor.putString("loginid", strLoginid);
+        				Prefs.putString("loginid", strLoginid);
 
         				strPassword1 = "123456";  // jkoh TODO replace this code to getText....
         				// password encryption by MD5
         				md5Hex = new String(Hex.encodeHex(DigestUtils.md5(strPassword1)));			
         				
-        				editor.putString("password",  md5Hex);
-        				editor.commit();     		        
+        				Prefs.putString("password",  md5Hex);
         		        //socket으로 데이터 요청(인증 요청 1000)
         				Packet packet = new Packet(Packet.CERT, Packet.OPTION_NONE);//패킷 종류 선택         		             		        
         		        packet.createPacketData(strLoginid, md5Hex.substring(0, 16), MacAddress);//패킷 데이터 입력       		        
@@ -252,9 +250,7 @@ public class SplashActivity extends Activity{
 
 																@Override
 																public void onResponce(CertificationKeyDAO object) {
-																	SharedPreferences.Editor editor = config.edit();
-																	editor.putString("CERTKEY", object.getCertKey());
-																	editor.commit();
+																	Prefs.putString("CERTKEY", object.getCertKey());
 																	spinner.setVisibility(View.GONE);	
 																	startMainActivity();
 																}
@@ -329,9 +325,7 @@ public class SplashActivity extends Activity{
 																				}).show();
 																		break;
 																	case 7:
-																		SharedPreferences.Editor editor = config.edit();
-																		editor.putString("CERTKEY", object.getCertKey());
-																		editor.commit();
+																		Prefs.putString("CERTKEY", object.getCertKey());
 																		new AlertDialog.Builder(getApplicationContext())
 																		.setTitle("알림")
 																		.setMessage("이미 등록된 셋탑입니다.")

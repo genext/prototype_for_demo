@@ -69,7 +69,7 @@ public class MyPlayer extends SurfaceView implements MediaPlayerControl {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		int width = getDefaultSize(videoWidth, widthMeasureSpec); // jkoh 이 함수가 왜 이탤릭체지? 무슨 의미? drugghanzi static 함수입니다.
+		int width = getDefaultSize(videoWidth, widthMeasureSpec);
 		int height = getDefaultSize(videoHeight, heightMeasureSpec);
 		if (videoWidth > 0 && videoHeight > 0) {
 			if (videoWidth * height > width * videoHeight) {

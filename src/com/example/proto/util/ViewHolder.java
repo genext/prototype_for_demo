@@ -13,7 +13,6 @@ package com.example.proto.util;
  * 안드로이드의 기본 단위는 view입니다. 부모 view에 childview가 속해있는 형태로 구성되어 있으며 해당 childview는 id(xml에 정의된)를 통해 접근 가능합니다.
  * 소스를 보시면 아시겠지만 viewHolder라는 더미를 통해 해당 부모뷰를 가져오고 부모뷰에 해당 자식뷰가 있으면 id를 통해 가져오고 없으면 put해서 다음번에 가져오는 방식입니다.			
 */			
-// jkoh 위의 주석의 정확한 의미?
 import android.util.SparseArray;
 import android.view.View;
 

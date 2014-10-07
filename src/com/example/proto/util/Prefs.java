@@ -11,11 +11,12 @@ import android.content.SharedPreferences.Editor;
 import android.os.Build;
 
 public class Prefs {
+	private static final String TVBOGO_CONFIG = "tvbogo_config";
 	private static SharedPreferences prefs;
 
 	public static void initPrefs(Context context) {
 		if (prefs == null) {
-			String key = "tvbogo_config";			
+			String key = TVBOGO_CONFIG;			
 			prefs = context.getSharedPreferences(key, Context.MODE_PRIVATE);
 		}
 	}

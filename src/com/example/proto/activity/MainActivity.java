@@ -64,9 +64,6 @@ import com.google.gson.Gson;
 /**
  *
  */
-/**
- *
- */
 public class MainActivity extends Activity implements
 		MyPlayer.OnPlayerEventListener, OnItemClickListener {
 
@@ -636,11 +633,9 @@ public class MainActivity extends Activity implements
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			// if (convertView == null)처럼 할당하지 않고 바로 쓸 수는 없는 것인가? 아니면 자바 특성 상
-			// 이렇게 할 수밖에 없는 건지?
 			View view = convertView;
 			if (view == null) {
-				view = LayoutInflater.from(context).inflate(R.layout.menu_cell,	parent, false);
+				view = LayoutInflater.from(context).inflate(R.layout.content_row,	parent, false);
 			}
 			
 			final TextView textView = ViewHolder.get(view, R.id.contents_name);
