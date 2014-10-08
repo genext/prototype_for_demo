@@ -1,6 +1,7 @@
 package com.example.proto.activity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -11,7 +12,6 @@ import android.content.DialogInterface;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Gravity;
@@ -27,7 +27,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -37,22 +36,18 @@ import com.example.proto.R;
 import com.example.proto.dao.ContentsDownDAO;
 import com.example.proto.dao.ContentsPayAmountDAO;
 import com.example.proto.dao.ContentsPayResultDAO;
-
 import com.example.proto.dao.SimpleDAO;
 import com.example.proto.dao.json.MenuJSON;
 import com.example.proto.dao.json.ProgramInfoJSON;
 import com.example.proto.dao.json.ProgramJSON;
 import com.example.proto.dao.json.ProgramJSON.Program;
-import com.example.proto.ftp.FTPTransferManager;
-import com.example.proto.ftp.FileEntity;
-import com.example.proto.ftp.TransferListener;
 import com.example.proto.mediaplayer.MyPlayer;
+import com.example.proto.socket.FtpTask.OnFtpErrorListener;
+import com.example.proto.socket.FtpTask.OnFtpResponceListener;
 import com.example.proto.socket.Packet;
 import com.example.proto.socket.SocketRequest;
 import com.example.proto.socket.SocketTask.OnSocketErrorListener;
 import com.example.proto.socket.SocketTask.OnSocketResponceListener;
-import com.example.proto.socket.FtpTask.OnFtpErrorListener;
-import com.example.proto.socket.FtpTask.OnFtpResponceListener;
 import com.example.proto.util.MyLog;
 import com.example.proto.util.Prefs;
 import com.example.proto.util.Tools;
@@ -84,9 +79,9 @@ public class MainActivity extends Activity implements
 	private ContentsAdapter leftAdapter, rightAdapter;
 	
 	private MenuJSON menuDAO;//메뉴 정보
-	private ProgramJSON programJSON;//프로그램 리스트 정보
-	// TODO 두번째 메뉴별로 programJSON을 연결하여 저장해야 함. map을 이용?
-	private List <ProgramJSON.Program> leftProgram = new ArrayList<ProgramJSON.Program>(); // TODO 이건 처음에 null일텐데? 할당에서 에러가 안 나나?
+	private ProgramJSON curProgramJSON;//프로그램 리스트 정보
+	HashMap<String, ProgramJSON> programInMenu = new HashMap<String, ProgramJSON>();
+	private List <ProgramJSON.Program> leftProgram = new ArrayList<ProgramJSON.Program>();
 	private List <ProgramJSON.Program> rightProgram = new ArrayList<ProgramJSON.Program>();
 
 	private ProgramInfoJSON programInfoJSON;//프로그램 상세 정보
@@ -350,11 +345,12 @@ public class MainActivity extends Activity implements
 	private void invalidateProgramList(final String secondMenuCode){
 		
 		boolean isExpiredObject; //프로그램 리스트가 갱신한지 1시간이 지났는지 체크하는 변수
-		
-		if(programJSON == null){//한번도 프로그램 리스트를 받아오지 않은 상태임
+
+		curProgramJSON = programInMenu.get(secondMenuCode);
+		if(curProgramJSON == null){//한번도 프로그램 리스트를 받아오지 않은 상태임
 			isExpiredObject = true;
 		}else{//한번이라도 프로그램 리스트를 받아온 상태라면 해당 리스트의 유효성 확인(받아온지 1시간 이상 경과 하였다면 갱신 한다)
-			if(programJSON.isExpiredObject(System.currentTimeMillis())){
+			if(curProgramJSON.isExpiredObject(System.currentTimeMillis())){
 				isExpiredObject = true;
 			}else{
 				isExpiredObject = false;
@@ -377,12 +373,13 @@ public class MainActivity extends Activity implements
 							public void onResponce(SimpleDAO object) {
 								Gson gson = new Gson();
 								String json = object.getData();
-								programJSON = gson.fromJson(json, ProgramJSON.class);								
-								programJSON.setCreateTime(System.currentTimeMillis());//새로 갱신된 시간 입력	
+								ProgramJSON tempJSON = gson.fromJson(json, ProgramJSON.class);								
+								tempJSON.setCreateTime(System.currentTimeMillis());//새로 갱신된 시간 입력	
+								programInMenu.put(secondMenuCode, tempJSON);
 								//화면에 뿌려줄 전체 프로그램 페이지 수 계산
-								int totalItemSize = programJSON.getPrograms().size();
+								int totalItemSize = tempJSON.getPrograms().size();
 								programTotalPage = totalItemSize / DEFAULT_PROGRAM_COUNT_PER_PAGE;
-								if(programJSON.getPrograms().size() % DEFAULT_PROGRAM_COUNT_PER_PAGE > 0)
+								if(tempJSON.getPrograms().size() % DEFAULT_PROGRAM_COUNT_PER_PAGE > 0)
 									programTotalPage++;								
 								
 								//해당 내용을 리스트에 뿌려 줘야 함
@@ -401,7 +398,7 @@ public class MainActivity extends Activity implements
 	  		      });			
 		}else{
 			
-			setProgramListData(currentProgramPage,  programJSON.getPrograms().size());
+			setProgramListData(currentProgramPage,  curProgramJSON.getPrograms().size());
 		}	
 		
 		// 프로그램 리스트가 보이도록 한다.
@@ -462,7 +459,7 @@ public class MainActivity extends Activity implements
 	 * @param index
 	 */
 	private void distinctionProgramList(final int index){
-		ProgramJSON.Program program = programJSON.getPrograms().get(index);
+		ProgramJSON.Program program = curProgramJSON.getPrograms().get(index);
 		int temp = index % DEFAULT_PROGRAM_COUNT_PER_PAGE;
 		if (temp >= (DEFAULT_PROGRAM_COUNT_PER_PAGE / 2)) {			
 			rightProgram.add(program);
