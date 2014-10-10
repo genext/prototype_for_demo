@@ -373,13 +373,14 @@ public class MainActivity extends Activity implements
 							public void onResponce(SimpleDAO object) {
 								Gson gson = new Gson();
 								String json = object.getData();
-								ProgramJSON tempJSON = gson.fromJson(json, ProgramJSON.class);								
-								tempJSON.setCreateTime(System.currentTimeMillis());//새로 갱신된 시간 입력	
-								programInMenu.put(secondMenuCode, tempJSON);
+								// TODO 만약 데이타가 없다면?
+								curProgramJSON = gson.fromJson(json, ProgramJSON.class);								
+								curProgramJSON.setCreateTime(System.currentTimeMillis());//새로 갱신된 시간 입력	
+								programInMenu.put(secondMenuCode, curProgramJSON);
 								//화면에 뿌려줄 전체 프로그램 페이지 수 계산
-								int totalItemSize = tempJSON.getPrograms().size();
+								int totalItemSize = curProgramJSON.getPrograms().size();
 								programTotalPage = totalItemSize / DEFAULT_PROGRAM_COUNT_PER_PAGE;
-								if(tempJSON.getPrograms().size() % DEFAULT_PROGRAM_COUNT_PER_PAGE > 0)
+								if(curProgramJSON.getPrograms().size() % DEFAULT_PROGRAM_COUNT_PER_PAGE > 0)
 									programTotalPage++;								
 								
 								//해당 내용을 리스트에 뿌려 줘야 함
