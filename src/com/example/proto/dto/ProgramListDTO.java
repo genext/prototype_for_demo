@@ -3,13 +3,14 @@ package com.example.proto.dto;
 
 import java.io.Serializable;
 
-public class SimpleDTO implements Serializable{
+public class ProgramListDTO implements Serializable{
 
 	private static final long serialVersionUID = 3862022531337516719L;	
-	private static final int MENU_CODE_LENGTH = 8;
+	private static final int CERT_KEY_LENGTH = 64;
+	private static final int MENU_CODE_LENGTH = 10;
 	
-	private byte[] certKey = new byte[65];//인증 key
-	private byte[] menuCode = new byte[MENU_CODE_LENGTH];//메뉴 코드
+	private byte[] certKey = new byte[CERT_KEY_LENGTH + 1];//인증 key
+	private byte[] menuCode = new byte[MENU_CODE_LENGTH + 1];//메뉴 코드
 	private int contentsId;
 	/**
 	 * @return the certKey

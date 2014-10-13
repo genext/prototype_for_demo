@@ -33,7 +33,7 @@ public class AdvertisementService extends IntentService{
 		String certKey = Prefs.getString("CERTKEY", null);
 		if(certKey != null && certKey != ""){
 			//광고 리스트 요청
-			Packet packet = new Packet(Packet.H3, Packet.OPEION_H3_AD);//패킷 종류 선택 	
+			Packet packet = new Packet(Packet.ETC, Packet.OPTION_AD);//패킷 종류 선택 	
 	        packet.createPacketData(Prefs.getString("CERTKEY", null));//패킷 데이터 입력 (인증키, 프로그램 코드)
 	        
 			SocketRequest.objectRequest(SocketRequest.SERV_IP, //서버 ip

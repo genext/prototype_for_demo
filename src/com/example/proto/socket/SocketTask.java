@@ -169,7 +169,7 @@ public class SocketTask<T> extends AsyncTask<Void, Void, T>{
 						errorListener.onError(resultCode, object);
 					}
 				}
-			}else if(agnetType == Packet.H3 || agnetType == Packet.PAY || agnetType == Packet.FTP){
+			}else if(agnetType == Packet.ETC || agnetType == Packet.PAY || agnetType == Packet.FTP){
 				if(resultCode == 9){//성공
 					if(listener != null){
 						listener.onResponce(object);

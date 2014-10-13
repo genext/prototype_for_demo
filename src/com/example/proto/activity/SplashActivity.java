@@ -79,7 +79,6 @@ public class SplashActivity extends Activity{
 		String strMessage = "CPU_ABI: "+Build.CPU_ABI + "\nBrand: " + Build.BRAND + "\nModel: " + Build.MODEL + "\nSerial: " + Build.SERIAL
 				+ "\nVersion: " + Build.VERSION.RELEASE;
 		MyLog.d("system info : %s", strMessage);
-		
 		// monitor info
 		DisplayMetrics disMetrics = getResources().getDisplayMetrics();
 		String strDisplayInfo = "Display Width: " + disMetrics.widthPixels + "\nDisplay Height: " + disMetrics.heightPixels

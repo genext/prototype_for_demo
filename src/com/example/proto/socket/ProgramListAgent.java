@@ -5,34 +5,34 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import com.example.proto.dto.ContentsPayDTO;
+import com.example.proto.dto.ProgramListDTO;
 import com.example.proto.dto.SocketDTO;
 import com.example.proto.util.MyLog;
 import com.example.proto.util.Tools;
 
-public class PayAgent extends PacketAgent{	
+public class ProgramListAgent extends PacketAgent{
 
-	private static final int CODE = 1200;
+	private static final int CODE = 1102;
 	
-	protected PayAgent(int option) {
+	protected ProgramListAgent(int option) {
 		super(option);		
 	}
 
 	@Override
 	protected void createPacketData(Object... params) {
-		// TODO Auto-generated method stub
 		
 		//params를 확인해서 해당 코드의 패킷이 아닐 경우 exception 발생해야 함(InvalidPacketAgentParameter)
 		
 		dto = new SocketDTO();		
 		
 		//윈도우 서버의 해당 데이터 타입이 unsigned int이므로 
-		dto.setCode(CODE & 0xffff);//code	
+		dto.setCode( (CODE + option) & 0xffff);//code	
 		
 		//데이터 전달을 위한 DTO 작성
-		ContentsPayDTO data = new ContentsPayDTO();
+		ProgramListDTO data = new ProgramListDTO();
 		int dataLength = data.getCertKey().length;
-		dataLength += 8; //contentsId allocate size
+		dataLength += data.getMenuCode().length;
+		
 		dto.setDataLength(dataLength);//data length
 		
 		dto.setTotalLength(CODE_MEMORY_ALLOCATE +
@@ -42,42 +42,35 @@ public class PayAgent extends PacketAgent{
 								 TAIL_MEMORY_ALLOCATE);//total length		
 		
 		data.setCertKey(((String)params[0]).getBytes());
-		data.setContentsId(((Long)params[1]).longValue());
-		MyLog.d("ask for ftp info for %s", params[1].toString());
+		data.setMenuCode(((String)params[1]).getBytes());	
+		
 		dto.setData(data);	
+		//MyLog.d("code %s", dto.getCode());
+		//MyLog.d("data %s", dto.getData().toString());
+		//MyLog.d("length %d", dto.getDataLength());
+		//MyLog.d("total len %d", dto.getTotalLength());
 	}
 	
 	@Override
 	protected <T> T convertDAO(Class<T> clazz, byte[] rcv) {
-		// TODO Auto-generated method stub
-		
 		int dataLength = Tools.byteArrayToInt(Tools.getBytes(rcv, 8, 4));
 		String data = Tools.byteArrayToString(Tools.getBytes(rcv, 12, dataLength));
-		
-		MyLog.d("file id from server : %s", data);
 		String[] splits = data.split("#<");
 		int resultCode = Integer.parseInt(splits[0]);
-		long realData = Long.parseLong(splits[1].trim());
-
-		
+		String realData = splits[1].replaceAll("'", "\"");
 		setResult(resultCode);
 		
 		try {
-			return clazz.getConstructor(Long.class, Integer.class).newInstance(realData, resultCode);
+			return clazz.getConstructor(String.class, Integer.class).newInstance(realData.trim(), resultCode);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -89,13 +82,16 @@ public class PayAgent extends PacketAgent{
 		//Object 형태로 된 DTO를 socket 통신을 위해 byte[]로 변경
 		ByteBuffer buffer = ByteBuffer.allocate(super.dto.getTotalLength());
 		byte[] result = new byte[super.dto.getTotalLength()];
-		buffer.order(ByteOrder.LITTLE_ENDIAN);
-		
+		buffer.order(ByteOrder.LITTLE_ENDIAN);		
+
 		buffer.putInt(dto.getCode() & 0xffff);//code		
 		buffer.putInt(dto.getTotalLength() & 0xffff);//total length	
 		buffer.putInt(dto.getDataLength() & 0xffff);//data length
-		buffer.put(((ContentsPayDTO)dto.getData()).getCertKey());//cert key
-		buffer.putLong(((ContentsPayDTO)dto.getData()).getContentsId() & 0xffffffff);//code	
+		buffer.put(((ProgramListDTO)dto.getData()).getCertKey());//cert key
+		
+		//1102(program list reuqest request 의 경우 요청하는 컨텐츠의 코드값을 넣어 줘야 함
+		buffer.put(((ProgramListDTO)dto.getData()).getMenuCode());//menu code
+		
 		buffer.put(dto.getTail());//tail		
 		result = buffer.array();
 		
