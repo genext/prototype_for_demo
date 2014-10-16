@@ -11,7 +11,6 @@ public class ProgramListDTO implements Serializable{
 	
 	private byte[] certKey = new byte[CERT_KEY_LENGTH + 1];//인증 key
 	private byte[] menuCode = new byte[MENU_CODE_LENGTH + 1];//메뉴 코드
-	private int contentsId;
 	/**
 	 * @return the certKey
 	 */
@@ -40,17 +39,4 @@ public class ProgramListDTO implements Serializable{
 			this.menuCode[i] = menuCode[i];
 		}
 	}
-	/**
-	 * @return the contentsId
-	 */
-	public int getContentsId() {
-		return contentsId;
-	}
-	/**
-	 * @param contentsId the contentsId to set
-	 */
-	public void setContentsId(int contentsId) {
-		this.contentsId = contentsId;
-	}	
-	
 }

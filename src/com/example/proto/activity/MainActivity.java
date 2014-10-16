@@ -359,7 +359,7 @@ public class MainActivity extends Activity implements
 		
 		if(isExpiredObject){
 			//socket으로 데이터 요청(program_list)
-			Packet packet = new Packet(Packet.PROGRAM_LIST, Packet.PROGRAM_LIST);//패킷 종류 선택 			
+			Packet packet = new Packet(Packet.PROGRAM_LIST, Packet.OPTION_NONE);//패킷 종류 선택 			
 	        packet.createPacketData(Prefs.getString("CERTKEY", null), secondMenuCode);//패킷 데이터 입력 (인증키, 메뉴 코드)      
 
 	        
@@ -647,7 +647,7 @@ public class MainActivity extends Activity implements
 	public void onItemClick(AdapterView<?> adapterView, View clickedView,
 			int position, long id) {
 
-		Packet packet = new Packet(Packet.PROGRAM_DETAIL, Packet.PROGRAM_DETAIL);//패킷 종류 선택 
+		Packet packet = new Packet(Packet.PROGRAM_DETAIL, Packet.OPTION_NONE);//패킷 종류 선택 
 		String code = ((ProgramJSON.Program)adapterView.getAdapter().getItem(position)).getCode();	
 		MyLog.d("program request code : %s", code);
         packet.createPacketData(Prefs.getString("CERTKEY", null), code);//패킷 데이터 입력 (인증키, 프로그램 코드)     
